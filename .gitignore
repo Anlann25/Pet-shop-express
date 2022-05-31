@@ -1,3 +1,5 @@
 /node_modules
 /dist
 /routes/dist
+/controllers/dist
+/models/dist

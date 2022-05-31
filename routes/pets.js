@@ -1,18 +1,27 @@
 const express = require('express');
+const router = express.Router();
+const petController = require('../controllers/petController');
 
-const routes = express.Router();
+//Mostra a página inicial dos pets
+router.get('/adm/pets', petController.index);
 
-router.get('/pets', (req, res) => res.send('Lista de pets'));
-router.get('/pets/:id', (req, res) =>
-  res.send('Detalhes do pet: ' + req.params.id),
-);
-router.post('/pets', (req, res) => res.send('Cadastro de pet'));
-router.put('/pets/:id', (req, res) =>
-  res.send('Atualização de pet: ' + req.params.id),
-);
-router.delete('/pets/:id', (req, res) =>
-  res.send('Exclusão de pet:' + req.params.id),
-);
+//Mostra a página para cadastrar um novo pet
+router.get('/adm/pets/cadastro', petController.create);
+
+//Envia as informações da página do pet para salvar no banco de dados
+router.post('/adm/pets', petController.store);
+
+//Mostra a página de detalhes de um pet
+router.get('/adm/pets/:id', petController.show);
+
+//Mostra a página para atualizar dados de um pet
+router.get('/adm/pets/:id/editar', petController.edit);
+
+//Atualiza os dados do pet selecionado no banco de dados
+router.put('/adm/pets/:id', petController.update);
+
+//Deleta um pet do banco de dados
+router.delete('/adm/pets/:id', petController.destroy);
 
 /*
 URL base: http://localhost:3000
